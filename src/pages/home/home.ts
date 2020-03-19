@@ -23,7 +23,7 @@ export class HomePage {
 
   async ionViewDidLoad() {
 
-    this.devs = await this.api.getDevs();
+    this.devs = await this.api.getDevs() || [];
     
     for (let x in this.devs) { 
       this.usernames.push(this.devs[x].github_username);
