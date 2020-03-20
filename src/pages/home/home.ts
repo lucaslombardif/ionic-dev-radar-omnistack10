@@ -18,15 +18,16 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, public api: ApiProvider) { }
 
-  public searchDevs(){
-    console.log(this.techs);
+  public async searchDevs(){
+    this.devs = await this.api.searchDevs(-27.2111041, -49.6457925, this.techs) || []
+    console.log(this.devs);
   }
   
 
   async ionViewDidEnter() {
     let icons;
 
-    this.devs = await this.api.searchDevs(-27.2111041, -49.6457925, this.techs) || [];
+    this.devs = await this.api.searchDevs(-27.2111041, -49.6457925, 'ReactJS') || [];
 
     console.log(this.techs);
 
