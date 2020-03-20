@@ -28,12 +28,9 @@ export class HomePage {
 
     for (let x in this.devs) {
       this.avatars.push(this.devs[x].avatar_url);
+      this.locations.push(this.devs[x].location.coordinates);
     }
     console.log(this.avatars);
-
-    for (let i in this.devs) {
-      this.locations.push(this.devs[i].location.coordinates);
-    }
     console.log(this.locations);
 
     const position = new google.maps.LatLng(-27.210794819883088, -49.63724979182513);
