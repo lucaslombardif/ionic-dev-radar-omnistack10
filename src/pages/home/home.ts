@@ -11,11 +11,6 @@ declare var google;
 export class HomePage {
   map: any;
   public devs: any = [];
-  public currentRegion: {
-    latitude,
-    longitude
-  };
-
   public locations: any = [];
   public avatars: any = [];
   public techs: string = 'Ionic';
@@ -24,35 +19,35 @@ export class HomePage {
 
   async ionViewDidLoad() {
 
+    let icons;
+
     this.devs = await this.api.getDevs() || [];
 
     for (let x in this.devs) {
       this.avatars.push(this.devs[x].avatar_url);
       this.locations.push(this.devs[x].location.coordinates);
-    }
-    console.log(this.avatars);
-    console.log(this.locations);
+    };
 
-    const position = new google.maps.LatLng(-27.210794819883088, -49.63724979182513);
+    console.log(this.devs);
+
+    const position = new google.maps.LatLng(this.locations[0][1], this.locations[0][0]);
 
     const mapOptions = {
-      zoom: 15,
+      zoom: 14,
       center: position,
       disableDefaultUI: true
     }
 
     this.map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-    const icon = {
-      url: this.devs[0].avatar_url
+    for (let i in this.locations) {
+      const marker = new google.maps.Marker({
+        position: new google.maps.LatLng(this.locations[i][1], this.locations[i][0]),
+        map: this.map,
+        icon: icons,
+        scaledSize: new google.maps.Size(10, 10),
+        animation: google.maps.Animation.DROP, // BOUNCE
+      });
     }
-    const marker = new google.maps.Marker({
-      position: position,
-      map: this.map,
-      icon: icon,
-      scaledSize: new google.maps.Size(10, 10),
-      animation: google.maps.Animation.DROP, // BOUNCE
-    });
   }
-
 }
