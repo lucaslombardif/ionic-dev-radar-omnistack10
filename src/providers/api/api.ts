@@ -15,4 +15,18 @@ export class ApiProvider {
     return devs;
   }
 
+  public async searchDevs() {
+    let latitude, longitude, techs;
+
+    const response = await this.http.get(this.apiURL + '/search', {
+      params: {
+        latitude,
+        longitude,
+        techs,
+      }
+    }).toPromise();
+
+    return response;
+  }
+
 }

@@ -49,10 +49,11 @@ export class HomePage {
         scaledSize: new google.maps.Size(10, 10),
         animation: google.maps.Animation.DROP, // BOUNCE
       });
-
       marker.addListener('click', () => {
         this.navCtrl.push('ProfilePage');
       });
     }
+
   }
+  
 }
