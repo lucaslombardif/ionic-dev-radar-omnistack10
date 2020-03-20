@@ -14,18 +14,21 @@ export class HomePage {
   public devs: any = [];
   public locations: any = [];
   public avatars: any = [];
+  techs:any = 'HTML';
 
   constructor(public navCtrl: NavController, public api: ApiProvider) { }
 
-  public doClick(){
-    console.log("Você cricou");
+  public searchDevs(){
+    console.log(this.techs);
   }
+  
 
-  async ionViewDidLoad() {
-
+  async ionViewDidEnter() {
     let icons;
 
-    this.devs = await this.api.searchDevs(-27.2111041, -49.6457925, 'HTML,CSS') || [];
+    this.devs = await this.api.searchDevs(-27.2111041, -49.6457925, this.techs) || [];
+
+    console.log(this.techs);
 
     for (let x in this.devs) {
       this.avatars.push(this.devs[x].avatar_url);
