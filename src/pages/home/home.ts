@@ -15,6 +15,7 @@ export class HomePage {
   public locations: any = [];
   public avatars: any = [];
   public techs: string = 'Ionic';
+  public responseDevs: any = [];
 
   constructor(public navCtrl: NavController, public api: ApiProvider) { }
 
@@ -26,7 +27,7 @@ export class HomePage {
 
     let icons;
 
-    this.devs = await this.api.getDevs() || [];
+    this.devs = await this.api.searchDevs(-27.2111041, -49.6457925, 'HTML,CSS') || [];
 
     for (let x in this.devs) {
       this.avatars.push(this.devs[x].avatar_url);
