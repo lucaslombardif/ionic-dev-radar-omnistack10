@@ -1,13 +1,17 @@
 <ion-header>
   <ion-navbar color="primary">
-    <div class="searchForm">
-      <ion-input class="searchInput" placeholder="Buscar devs..."></ion-input>
-    </div>
+    <ion-title>Dev Radar</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
-  <div #map id="map">
-    <button ion-button block style='z-index: 9999;'>Block Button</button>
+  <div class="searchForm">
+    <ion-input  class="searchInput" placeholder="Buscar devs..."></ion-input>
   </div>
+  <div #map id="map"></div>
+  <ion-fab top left>
+    <button ion-fab (click)="doClick()" class="searchButton">
+      <ion-icon name="search"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>

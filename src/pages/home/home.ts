@@ -18,6 +18,10 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, public api: ApiProvider) { }
 
+  public doClick(){
+    console.log("Você cricou");
+  }
+
   async ionViewDidLoad() {
 
     let icons;
@@ -55,5 +59,5 @@ export class HomePage {
     }
 
   }
-  
+
 }
