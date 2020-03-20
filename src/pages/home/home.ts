@@ -14,9 +14,10 @@ export class HomePage {
   public currentRegion: {
     latitude,
     longitude
-  }
+  };
 
-  public usernames: any = [];
+  public locations: any = [];
+  public avatars: any = [];
   public techs: string = 'Ionic';
 
   constructor(public navCtrl: NavController, public api: ApiProvider) { }
@@ -24,12 +25,16 @@ export class HomePage {
   async ionViewDidLoad() {
 
     this.devs = await this.api.getDevs() || [];
-    
-    for (let x in this.devs) { 
-      this.usernames.push(this.devs[x].github_username);
-    }
 
-    console.log(this.usernames);
+    for (let x in this.devs) {
+      this.avatars.push(this.devs[x].avatar_url);
+    }
+    console.log(this.avatars);
+
+    for (let i in this.devs) {
+      this.locations.push(this.devs[i].location.coordinates);
+    }
+    console.log(this.locations);
 
     const position = new google.maps.LatLng(-27.210794819883088, -49.63724979182513);
 
@@ -41,12 +46,14 @@ export class HomePage {
 
     this.map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
+    const icon = {
+      url: this.devs[0].avatar_url
+    }
     const marker = new google.maps.Marker({
       position: position,
       map: this.map,
-      //Titulo
-      title: 'Minha posição',
-      //Animção
+      icon: icon,
+      scaledSize: new google.maps.Size(10, 10),
       animation: google.maps.Animation.DROP, // BOUNCE
     });
   }
