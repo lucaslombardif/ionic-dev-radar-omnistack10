@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ApiProvider } from '../../providers/api/api';
+import { ProfilePage } from '../profile/profile';
 
 declare var google;
 
@@ -47,6 +48,10 @@ export class HomePage {
         icon: icons,
         scaledSize: new google.maps.Size(10, 10),
         animation: google.maps.Animation.DROP, // BOUNCE
+      });
+
+      marker.addListener('click', () => {
+        this.navCtrl.push('ProfilePage');
       });
     }
   }
