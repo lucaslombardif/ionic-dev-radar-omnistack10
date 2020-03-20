@@ -14,8 +14,6 @@ export class HomePage {
   public devs: any = [];
   public locations: any = [];
   public avatars: any = [];
-  public techs: string = 'Ionic';
-  public responseDevs: any = [];
 
   constructor(public navCtrl: NavController, public api: ApiProvider) { }
 
