@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ApiProvider } from '../../providers/api/api';
-import { ProfilePage } from '../profile/profile';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 declare var google;
 
@@ -15,7 +15,7 @@ export class HomePage {
   public avatars: any = [];
   techs: any = 'HTML';
 
-  constructor(public navCtrl: NavController, public api: ApiProvider) { }
+  constructor(public navCtrl: NavController, public api: ApiProvider, public iab: InAppBrowser) { }
 
   ionViewDidLoad() {
     this.loadDevs();
@@ -60,7 +60,8 @@ export class HomePage {
         animation: google.maps.Animation.DROP, // BOUNCE
       });
       marker.addListener('click', () => {
-        this.navCtrl.push('ProfilePage', this.devs[i].github_username);
+        const browser = this.iab.create(`https://github.com/${this.devs[i].github_username}`, '_blank');
+        browser.show();;
       });
     }
 
