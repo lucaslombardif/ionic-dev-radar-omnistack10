@@ -48,6 +48,7 @@ export class HomePage {
     for (let i in this.devs) {
       let icon = {
         url: this.devs[i].avatar_url,
+        scaledSize: new google.maps.Size(50, 50),
         size: {
           width: 50,
           height: 50
@@ -57,8 +58,8 @@ export class HomePage {
       const marker = new google.maps.Marker({
         position: new google.maps.LatLng(this.devs[i].location.coordinates[1], this.devs[i].location.coordinates[0]),
         map: this.map,
+        icon: icon,
         title: this.devs[i].name,
-        scaledSize: new google.maps.Size(10, 10),
         animation: google.maps.Animation.DROP, // BOUNCE
       });
       marker.addListener('click', () => {
