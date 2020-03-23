@@ -5,8 +5,8 @@
 </ion-header>
 
 <ion-content>
-  <form  (ngSubmit)="searchDevs()"class="searchForm">
-    <ion-input [(ngModel)]="techs" name="techs"  class="searchInput" placeholder="Buscar devs..."></ion-input>
+  <form (ngSubmit)="ionViewDidEnter()" class="searchForm">
+    <ion-input [(ngModel)]="techs" name="techs" class="searchInput" placeholder="Buscar devs..."></ion-input>
     <button type="submit" class="searchButton">
       <ion-icon name="search"></ion-icon>
     </button>
