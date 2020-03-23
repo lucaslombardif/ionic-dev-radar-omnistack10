@@ -62,7 +62,7 @@ export class HomePage {
         animation: google.maps.Animation.DROP, // BOUNCE
       });
       marker.addListener('click', () => {
-        this.navCtrl.push('ProfilePage');
+        this.navCtrl.push('ProfilePage', this.devs[i].github_username);
       });
     }
 

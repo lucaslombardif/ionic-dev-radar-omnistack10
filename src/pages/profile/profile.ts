@@ -8,16 +8,20 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
   templateUrl: 'profile.html',
 })
 export class ProfilePage {
-  
-  public url: string  = 'https://github.com/lucaslombardif'
+
+  public url: string = 'https://github.com'
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public iab: InAppBrowser) {
   }
 
   ionViewDidLoad() {
-    //const browser = this.iab.create(this.url, '_blank');
-    //browser.show();
-    console.log('In long time a go...')
+    this.openGitHubProfile();
+  }
+
+  openGitHubProfile() {
+    let username = this.navParams.data;
+    const browser = this.iab.create(this.url + `/${username}`, '_blank');
+    browser.show();
   }
 
 }
