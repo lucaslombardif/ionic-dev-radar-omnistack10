@@ -17,8 +17,11 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, public api: ApiProvider) { }
 
-  async ionViewDidEnter() {
-    let icons;
+  ionViewDidEnter() {
+    this.loadDevs();
+  }
+
+  public async loadDevs() {
 
     this.devs = await this.api.searchDevs(-27.2111041, -49.6457925, this.techs || []);
 
@@ -36,13 +39,25 @@ export class HomePage {
       disableDefaultUI: true
     }
 
+    let icon = {
+      url: this
+    }
+
     this.map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
     for (let i in this.devs) {
+      let icon = {
+        url: this.devs[i].avatar_url,
+        size: {
+          width: 50,
+          height: 50
+        },
+      }
+
       const marker = new google.maps.Marker({
         position: new google.maps.LatLng(this.devs[i].location.coordinates[1], this.devs[i].location.coordinates[0]),
         map: this.map,
-        icon: icons,
+        title: this.devs[i].name,
         scaledSize: new google.maps.Size(10, 10),
         animation: google.maps.Animation.DROP, // BOUNCE
       });
