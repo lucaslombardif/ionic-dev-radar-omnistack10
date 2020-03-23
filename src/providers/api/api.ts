@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class ApiProvider {
 
-  public apiURL = 'http://localhost:3333';
+  public apiURL = 'https://backend-omnistack-10.herokuapp.com';
 
   constructor(public http: HttpClient) {
     console.log('Hello ApiProvider Provider');

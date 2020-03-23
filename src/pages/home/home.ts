@@ -17,7 +17,7 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, public api: ApiProvider) { }
 
-  ionViewDidEnter() {
+  ionViewDidLoad() {
     this.loadDevs();
   }
 
@@ -39,9 +39,6 @@ export class HomePage {
       disableDefaultUI: true
     }
 
-    let icon = {
-      url: this
-    }
 
     this.map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
@@ -53,7 +50,7 @@ export class HomePage {
           width: 50,
           height: 50
         },
-      }
+      };
 
       const marker = new google.maps.Marker({
         position: new google.maps.LatLng(this.devs[i].location.coordinates[1], this.devs[i].location.coordinates[0]),
