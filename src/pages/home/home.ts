@@ -78,6 +78,8 @@ export class HomePage {
         '<p>' + this.devs[i].bio + '</p>' +
         '<p>' + '<b> Techs: </b>' + this.devs[i].techs.join(', ') + '</p>' +
         '</div>' +
+        '<a href=' + `https://github.com/${this.devs[i].github_username}` + '>' +
+        'Ver Perfil no Github</a> ' +
         '</div>';
 
       let infowindow = new google.maps.InfoWindow({
@@ -92,5 +94,4 @@ export class HomePage {
     }
 
   }
-
 }
