@@ -15,6 +15,8 @@ export class HomePage {
   public devs: any = [];
   techs: any = '';
   public position;
+  public latitudeAtual;
+  public longitudeAtual;
 
   constructor(
     public navCtrl: NavController,
@@ -29,19 +31,22 @@ export class HomePage {
 
   public async loadDevs() {
 
-    this.devs = await this.api.searchDevs(-27.2111041, -49.6457925, this.techs || []);
-
-    console.log(this.devs);
-
     this.geolocation.getCurrentPosition().then((resp) => {
-      this.position = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
+      this.latitudeAtual = resp.coords.latitude;
+      this.longitudeAtual = resp.coords.longitude;
     }).catch((error) => {
       console.log('Error getting location', error);
     });
 
+    this.devs = await this.api.searchDevs(this.latitudeAtual, this.longitudeAtual, this.techs || []);
+
+    console.log(this.devs);
+
+    const position = new google.maps.LatLng(this.latitudeAtual, this.longitudeAtual);
+
     const mapOptions = {
       zoom: 13,
-      center: this.position,
+      center: position,
       disableDefaultUI: true
     }
 
@@ -67,8 +72,8 @@ export class HomePage {
 
       let contentString = '<div>' +
         '<div>' +
-        '</div>' +
         '<h4>' + this.devs[i].name + '</h4>' +
+        '</div>' +
         '<div>' +
         '<p>' + this.devs[i].bio + '</p>' +
         '<p>' + '<b> Techs: </b>' + this.devs[i].techs.join(', ') + '</p>' +
