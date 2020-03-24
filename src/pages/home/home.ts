@@ -66,7 +66,7 @@ export class HomePage {
       });
       marker.addListener('click', () => {
         const browser = this.iab.create(`https://github.com/${this.devs[i].github_username}`, '_blank');
-        browser.show();;
+        browser.show();
       });
     }
 

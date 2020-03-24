@@ -4,7 +4,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content scrollbar-y="false">
   <form (ngSubmit)="loadDevs()" class="searchForm">
     <ion-input [(ngModel)]="techs" name="techs" class="searchInput" placeholder="Buscar devs por techs..."></ion-input>
     <button type="submit" class="searchButton">
