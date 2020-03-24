@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ApiProvider } from '../../providers/api/api';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { Geolocation } from '@ionic-native/geolocation';
 
 declare var google;
 
@@ -12,10 +13,15 @@ declare var google;
 export class HomePage {
   map: any;
   public devs: any = [];
-  public avatars: any = [];
   techs: any = 'HTML';
+  public position;
 
-  constructor(public navCtrl: NavController, public api: ApiProvider, public iab: InAppBrowser) { }
+  constructor(
+    public navCtrl: NavController,
+    public api: ApiProvider,
+    public iab: InAppBrowser,
+    private geolocation: Geolocation
+  ) { }
 
   ionViewDidLoad() {
     this.loadDevs();
@@ -25,20 +31,19 @@ export class HomePage {
 
     this.devs = await this.api.searchDevs(-27.2111041, -49.6457925, this.techs || []);
 
-    for (let x in this.devs) {
-      this.avatars.push(this.devs[x].avatar_url);
-    };
-
     console.log(this.devs);
 
-    const position = new google.maps.LatLng(-27.2111041, -49.6457925);
+    this.geolocation.getCurrentPosition().then((resp) => {
+      this.position = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
 
     const mapOptions = {
       zoom: 13,
-      center: position,
+      center: this.position,
       disableDefaultUI: true
     }
-
 
     this.map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
