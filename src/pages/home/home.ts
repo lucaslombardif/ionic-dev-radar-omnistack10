@@ -13,7 +13,7 @@ declare var google;
 export class HomePage {
   map: any;
   public devs: any = [];
-  techs: any = 'HTML';
+  techs: any = '';
   public position;
 
   constructor(
@@ -64,9 +64,25 @@ export class HomePage {
         title: this.devs[i].name,
         animation: google.maps.Animation.DROP, // BOUNCE
       });
+
+      let contentString = '<div>' +
+        '<div>' +
+        '</div>' +
+        '<h4>' + this.devs[i].name + '</h4>' +
+        '<div>' +
+        '<p>' + this.devs[i].bio + '</p>' +
+        '<p>' + '<b> Techs: </b>' + this.devs[i].techs.join(', ') + '</p>' +
+        '</div>' +
+        '</div>';
+
+      let infowindow = new google.maps.InfoWindow({
+        content: contentString
+      });
+
       marker.addListener('click', () => {
-        const browser = this.iab.create(`https://github.com/${this.devs[i].github_username}`, '_blank');
-        browser.show();
+        //const browser = this.iab.create(`https://github.com/${this.devs[i].github_username}`, '_blank');
+        //browser.show();
+        infowindow.open(this.map, marker);
       });
     }
 
